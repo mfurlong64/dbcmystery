@@ -19,15 +19,14 @@ end
 post '/users' do
   # consider add error handling'
 
-  @error = nil
-
-  @user = User.new(name: params[:name], email: params[:email], password: params[:password])
-  @user_copy = User.find_by(email:@user.email)
+  @user = User.new(name: params[:name],
+    email: params[:email],
+    password: params[:password])
 
   if @user.save
     @user.save
     session[:user_id] = @user.id
-    redirect '/users/#{@user.id}'
+    redirect "/users/#{@user.id}"
   else
     @error = "Sorry this email has already been taken"
     erb :'users/new'

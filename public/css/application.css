@@ -55,3 +55,7 @@ li a:hover {
 #titler {
      margin: 50px;
 }
+
+#main_event {
+  max-width: 100px;
+}

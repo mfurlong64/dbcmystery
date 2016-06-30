@@ -1,4 +1,16 @@
 <div class="container">
-  I love it
+  <h3>Your Information</h3>
+  <p>Your Name: <%= @user.name %></p>
+  <p>Your Email: <%= @user.name %></p>
+  <p>Your Avatar:</p>
+  <img id="main_event" src="http://thecatapi.com/api/images/get?image_id=1d<%= @user.id %>">
+
+</div>
+
+<div class="container">
+  <h3>Games You're In</h3>
+  <% @user.parties.each do |party|  %>
+  <p><a href="/parties/<%= party.id %>/login"><%= party.title %></p>
+  <% end  %>
 
 </div>
