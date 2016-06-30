@@ -1,10 +1,15 @@
+require 'bcrypt'
+
 class Party < ActiveRecord::Base
 
-  validates :title, :password_hash, presence: true
-  validates :title, uniqueness: true
+  validates :title, presence: true
+  validates :password_hash, presence: true
+  validates :title, uniqueness: true
 
-  has_many :users, through: :users_parties
-  belongs_to :user, through: :user_party
+  has_many :users
+  has_many :user_parties
+
+  belongs_to :user
 
   include BCrypt
 
@@ -20,5 +25,4 @@ class Party < ActiveRecord::Base
   def authenticate(password)
     self.password == password
   end
-
 end

@@ -1,10 +1,15 @@
+require 'bcrypt'
+
 class User < ActiveRecord::Base
 
-  validates :name, :email, presence: true
-  validates :name, uniqueness: true
+  validates :name, presence: true
+  validates :email, presence: true
+  validates :password_hash, presence: true
 
-  has_many :parties, through: :users_parties
-  belongs_to :party, through: :user_party
+  has_many :parties
+  has_many :user_parties
+
+  belongs_to :party
 
   include BCrypt
 
@@ -20,4 +25,5 @@ class User < ActiveRecord::Base
   def authenticate(password)
     self.password == password
   end
+
 end
