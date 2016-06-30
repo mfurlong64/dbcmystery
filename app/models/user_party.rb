@@ -1,3 +1,4 @@
 class UserParty < ActiveRecord::Base
-  # Remember to create a migration!
+
+  validates :user_id, :party_id, :voted, :votes_recieved, :murderer, presence: true
 end
