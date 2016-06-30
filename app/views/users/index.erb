@@ -2,7 +2,9 @@
   <h2> Welcome <%= @current_user %> to DBC Murder Mysteries </h2>
 </div>
 <div class="container">
-  <h3> Current Games: </h3>
-  <%= erb  %>
-
+  <h3> Current Games in Session: </h3>
+  <% @parties.each do |party| %>
+     <a href="/parties/<%= party.id %>"><%=  party.title %></a>
+     <p> Number of players in game: <%= party.users.count %> </p>
+  <% end %>
 </div>
