@@ -8,11 +8,20 @@ get '/users' do
   erb :'users/index' #show all users view (index)
 end
 
+get '/users/new' do
+  erb :'users/new'
+end
+
+get '/users/login' do
+  erb :'users/login'
+end
+
 post '/users' do
   # consider add error handling'
 
   @error = nil
-  @user = User.new(email: params[:email],password: params[:password])
+
+  @user = User.new(name: params[:name], email: params[:email], password: params[:password])
   @user_copy = User.find_by(email:@user.email)
 
   if @user.save
@@ -23,8 +32,18 @@ post '/users' do
     @error = "Sorry this email has already been taken"
     erb :'users/new'
   end
-
 end
+
+get '/users/logout' do
+  session[:user_id] = nil
+  redirect '/'
+end
+
+get '/users/:id' do
+  @user = User.find(session[:user_id])
+  erb :"users/show"
+end
+
 
 post '/users/login' do
 
@@ -38,15 +57,4 @@ post '/users/login' do
   end
 end
 
-get '/users/login' do
-  erb :'users/login'
-end
 
-get '/users/new' do
-  erb :'users/new'
-end
-
-get '/users/logout' do
-  session[:user_id] = nil
-  redirect '/'
-end
