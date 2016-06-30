@@ -1,0 +1,15 @@
+<div class = 'container'>
+<h1> Register as a New Dinner Guest! </h1>
+  <% if @error  %>
+   <p> <%= @error %> :-( <p>
+  <%end  %>
+<form action="/users" method="post">
+  Guest Name:
+  <input class="boxes" type="text" name="name"><br>
+  Email:
+  <input class="boxes" type="text" name="email"><br>
+  Password:
+  <input class="boxes" type="password" name="password">
+  <input type="submit" value="Sign Up">
+</form>
+</div>
