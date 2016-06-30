@@ -1,5 +1,6 @@
 body {
-  background-color: #DCDCDC;
+  background-color: #F5F5DC;
+  font-family: "Trebuchet MS", Helvetica, sans-serif
 }
 
 .container {
@@ -7,7 +8,11 @@ body {
   width: 600px;
   padding: 0px 20px 20px 20px;
   border: 1px dotted black;
+  width: 50%;
+  border: 3px dotted  #2F4F4F;
+  padding: 20px;
 }
+
 th {
   text-align: left;
 }
@@ -17,14 +22,14 @@ th {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #8B0000;
+    background-color:   #2F4F4F;
 }
 
-.list_item {
+li {
     float: right;
 }
 
-.list_item a {
+li a {
     display: block;
     color: #F5F5DC;
     text-align: center;
@@ -32,18 +37,20 @@ th {
     text-decoration: none;
 }
 
+#main_title {
+    float: left;
+    display: block;
+    color: #F5F5DC;
+    text-align: center;
+    padding: 2px 20px;
+    text-decoration: none;
 
+}
 
 li a:hover {
-    background-color: purple;
+    background-color:  #DC143C;
 }
 
-.container {
-    margin: 200px;
-    width: 50%;
-    border: 3px dotted #B0C4DE;
-    padding: 20px;
-}
 
 #titler {
      margin: 50px;

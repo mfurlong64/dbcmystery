@@ -19,15 +19,16 @@
 </head>
 <body>
   <ul id="main_bar">
+    <li id="main_title" ><h3> DBC Murder Mystery </h3></li>
     <li class="list_item" id="home"><a href="/">Home</a></li>
     <% if session[:user_id] %>
       <% @user = User.find(session[:user_id])  %>
 
-      <li><a href="/users/show">Profile</a></li>
-      <li><a href="/users/logout">Logout</a></li>
+      <li class="list_item" ><a href="/users/show">Profile</a></li>
+      <li class="list_item" ><a href="/users/logout">Logout</a></li>
     <% else %>
-      <li><a href="/users/login">Login</a></li>
-      <li><a href="/users/new">Register</a></li>
+      <li class="list_item" ><a href="/users/login">Login</a></li>
+      <li class="list_item" ><a href="/users/new">Register</a></li>
     <% end %>
   </ul>
 
