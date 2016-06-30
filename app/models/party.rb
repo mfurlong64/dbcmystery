@@ -6,8 +6,8 @@ class Party < ActiveRecord::Base
   validates :password_hash, presence: true
   validates :title, uniqueness: true
 
-  has_many :users
   has_many :user_parties
+  has_many :users, through: :user_parties
 
   belongs_to :user
 
@@ -26,3 +26,9 @@ class Party < ActiveRecord::Base
     self.password == password
   end
 end
+
+# Party.create(title: "night walkers", password_hash: "night")
+
+# User.create(name: "mike", email: "mike@mike.com", password_hash: "mike")
+
+# UserParty.new(user_id: 1, party_id: 1)
