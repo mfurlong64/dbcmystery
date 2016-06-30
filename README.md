@@ -36,5 +36,6 @@ Be prepared to give and receive specific, actionable, and kind feedback!
 3. Have a successful login for a party -- will require a double authentication
 4. Be able to vote on a specific party
 5. Use the user_parties join session to save the has_voted, votes_against, murderer?
-6. Make invites so that uses can join all the things
-7. Grant admin access so that only the party creator can invite and
+6. Have a base page with all the open parties
+7. Destroy a party once it's and a winner has been placed
+

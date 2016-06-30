@@ -1,3 +1,7 @@
+body {
+  background-color: #DCDCDC;
+}
+
 .container {
   margin: 20px auto;
   width: 600px;
@@ -6,4 +10,41 @@
 }
 th {
   text-align: left;
+}
+
+#main_bar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #8B0000;
+}
+
+.list_item {
+    float: right;
+}
+
+.list_item a {
+    display: block;
+    color: #F5F5DC;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+
+
+li a:hover {
+    background-color: purple;
+}
+
+.container {
+    margin: 200px;
+    width: 50%;
+    border: 3px dotted #B0C4DE;
+    padding: 20px;
+}
+
+#titler {
+     margin: 50px;
 }
