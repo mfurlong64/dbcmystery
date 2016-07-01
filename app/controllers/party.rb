@@ -50,7 +50,9 @@ end
 
 get '/parties/:id/show' do
 
-  @guest_list = session[:party_id].users
+  @current_party = Party.find(session[:party_id])
+
+  @guest_list = Party.find(session[:party_id]).users
 
   erb :'/parties/show'
 end
@@ -61,9 +63,9 @@ post '/parties/login' do
   @temp_party = Party.find(params[:party_id])
 
   if @temp_party.authenticate(params[:password])
-    session[:party_id] = @temp_party
+    session[:party_id] = @temp_party.id
     if UserParty.find_or_create_by(user_id: current_user.id, party_id: session[:party_id])  # will find the user join table or create it
-      UserParty.find_or_create_by(user_id: current_user.id, party_id: session[:party_id]) 
+      UserParty.find_or_create_by(user_id: current_user.id, party_id: session[:party_id])
     else
       erb :index
     end
@@ -79,7 +81,9 @@ end
 
 get '/parties/show/ok' do
 
-  @guest_list = session[:party_id].users   # Consider using a helper files
+  @current_party = Party.find(session[:party_id])
+
+  @guest_list = Party.find(session[:party_id]).users  # Consider using a helper files
 
   @murder_array = UserParty.where(party_id: session[:party_id])
 
@@ -92,6 +96,33 @@ get '/parties/show/ok' do
   erb :'/parties/show'
 
 end
+
+post '/parties/:id/show' do
+  redirect '/parties/show'
+end
+
+
+
+post '/parties/show/ok' do
+
+@vote_array = UserParty.where(party_id: session[:party_id], user_id: session[:user_id]).first
+@vote_array.voted = 0
+@vote_array.save
+
+# @votehold = current_user.user_parties.find_by(user_id: current_user.id, party_id: session[:party_id]).voted = 0
+# @votehold.save
+  redirect '/parties/show/ok'
+end
+
+
+
+
+
+
+
+
+
+
 
 
 
