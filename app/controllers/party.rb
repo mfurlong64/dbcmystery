@@ -53,8 +53,22 @@ end
 
 
 post '/parties/login' do
-  erb :'/parties/show'
+
+  @temp_party = Party.find(params[:party_id])
+
+  if @temp_party.authenticate(params[:password])
+    session[:party_id] = @temp_party.id
+    redirect "/parties/#{@temp_party.id}/show"
+  else
+    @error = "Password is not correct"
+    redirect '/users'
+  end
+
 end
+
+
+
+
 
 
 

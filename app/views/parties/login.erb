@@ -2,9 +2,11 @@
 <div class = 'container'>
 <h1> Log Into the Party: </h1>
 <h2><%= @party.title %> </h2>
+
 <form action="/parties/login"" method="post">
   Party Password:
   <input class="boxes" type="password" name="password">
+  <input type="hidden" name="party_id" value="<%= @party.id %>">
   <input type="submit" value="Login">
 </form>
 </div>

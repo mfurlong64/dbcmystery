@@ -1,9 +1,9 @@
 get '/users' do
+ 
   @users = User.all #define instance variable for view
   @parties = Party.all
-  @current_user = nil
-  if session[:user_id]
-    @current_user = User.find(session[:user_id])    # Finds the current user if active
+  if current_user
+    @current_user = User.find(current_user.id)    # Finds the current user if active
   end
   erb :'users/index' #show all users view (index)
 end
