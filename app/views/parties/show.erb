@@ -1,1 +1,25 @@
-This the party
+<div class="container">
+	<h2> Welcome guests to <%= session[:party_id].title %></h2>
+	
+<div class="container">	
+	<%@guest_list.each do |guest| %>
+		<div class="guybox">
+			<h4>Guest: <%= guest.name %></h4> 
+			<img id="main_event" src="http://thecatapi.com/api/images/get?image_id=1d<%= guest.id %>">
+			<% if session[:party_id].user_parties.find_by(user_id: current_user.id).voted == 1 %>
+				<form action="/" method="post">
+					<input type="hidden" name="ready" value="">
+					<input type="submit" value="VOTE">
+				</form>
+			<% end %>
+
+		</div>
+	<% end %>
+</div>
+
+<div class="container">
+	<form action="/" method="post">
+		<input type="hidden" name="ready" value="">
+		<input type="submit" value="Start Game and Assign the Murderer!">
+	</form>
+</div>

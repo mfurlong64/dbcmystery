@@ -47,7 +47,11 @@ post '/parties' do
 
 end
 
+
 get '/parties/:id/show' do
+
+  @guest_list = session[:party_id].users
+
   erb :'/parties/show'
 end
 
@@ -57,7 +61,7 @@ post '/parties/login' do
   @temp_party = Party.find(params[:party_id])
 
   if @temp_party.authenticate(params[:password])
-    session[:party_id] = @temp_party.id
+    session[:party_id] = @temp_party
     UserParty.find_or_create_by(user_id: current_user.id, party_id: current_party.id)  # will find the user join table or create it
     redirect "/parties/#{@temp_party.id}/show"
   else
@@ -66,6 +70,11 @@ post '/parties/login' do
   end
 
 end
+
+
+
+
+
 
 
 

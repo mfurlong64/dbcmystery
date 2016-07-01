@@ -14,4 +14,8 @@ helpers do
       party.id
     end
   end
+
+  def user_voted
+    return session[:party_id].user_parties.find_by(user_id: current_user.id).vote
+  end
 end

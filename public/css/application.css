@@ -59,3 +59,12 @@ li a:hover {
 #main_event {
   max-width: 100px;
 }
+
+
+.guybox {
+  background-color: lightgreen;
+  margin: 20px;
+  width: 200px;
+  padding: 10px;
+  position: static;
+}
