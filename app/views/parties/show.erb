@@ -13,7 +13,7 @@
 	<% end %>
 
 	<% if @all_voted == 0 %>
-	<a href="#"> Everyone has voted, click here to see who wins! </a>
+	<a href="/won"> Everyone has voted, click here to see who wins! </a>
 	<%  end %>
 </div>
 <div class="container">
@@ -26,7 +26,7 @@
 			<img id="main_event" src="http://thecatapi.com/api/images/get?image_id=1d<%= guest.id %>">
 			<% if @current_party.user_parties.find_by(user_id: current_user.id).voted == 1 %>
 				<form action="/parties/show/ok" method="post">
-					<input type="hidden" name="vote_for" value="<%= guest.user_parties.find_by(user_id: guest.id, party_id: session[:party_id]) %>">
+					<input type="hidden" name="vote_user_id" value="<%= guest.id %>">
 					<input type="submit" value="VOTE">
 				</form>
 			<% end %>

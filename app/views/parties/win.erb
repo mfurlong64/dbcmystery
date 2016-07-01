@@ -1,0 +1,15 @@
+<div class="container">
+
+<h3><% @guest_list.each do |guest|%> </h3>
+  <div class="guybox">
+  <p>- <%= guest.name %></p>
+  <img id="main_event" src="http://thecatapi.com/api/images/get?image_id=1d<%= guest.id %>">
+  <p>Votes Received: <%= guest.user_parties.find_by(party_id: session[:party_id]).votes_recieved %></p>
+  <p> Is the Murderer... <%= guest.user_parties.find_by(party_id: session[:party_id]).murderer %></p>
+  </div>
+  <% end %>
+
+<h4> Thanks for playing! </h4>
+
+  <a href="/"> Return to Main </a>
+</div>

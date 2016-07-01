@@ -117,15 +117,13 @@ post '/parties/show/ok' do
 @vote_array.voted = 0
 @vote_array.save
 
-@user_get_voted = params[:vote_for]
+@user_voted_id = params[:vote_user_id]
 
+@get_users_parties_vote_for = UserParty.find_by(user_id: @user_voted_id, party_id: session[:party_id] )
 
-@vote_for = UserParty.find(@user_get_voted)
+@get_users_parties_vote_for.votes_recieved += 1
 
-@vote_for += 1
-
-puts "this the #{@votes_for}"
-@vote_for.save
+@get_users_parties_vote_for.save
 
 # @votehold = current_user.user_parties.find_by(user_id: current_user.id, party_id: session[:party_id]).voted = 0
 # @votehold.save
@@ -134,8 +132,14 @@ end
 
 
 
+get '/won' do
 
+  @party = Party.find(session[:party_id])
 
+  @guest_list = Party.find(session[:party_id]).users
+
+  erb :'/parties/win'
+end
 
 
 
