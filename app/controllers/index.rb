@@ -1,4 +1,5 @@
 get '/' do
+  session[:user_id] = nil
 
   # Look in app/views/index.erb
   redirect '/users'
