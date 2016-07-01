@@ -1,6 +1,5 @@
-require 'rake'
-require 'rspec/core/rake_task'
 
+require 'rake'
 
 require ::File.expand_path('../config/environment', __FILE__)
 
@@ -75,7 +74,6 @@ namespace :generate do
     File.open(path, 'w+') do |f|
       f.write(<<-EOF.strip_heredoc)
         require 'spec_helper'
-
         describe #{name} do
           pending "add some examples to (or delete) #{__FILE__}"
         end
@@ -86,16 +84,19 @@ namespace :generate do
 end
 
 namespace :db do
-  desc "Create the database at #{DB_NAME}"
+  desc "Drop, create, and migrate the database"
+  task :reset => [:drop, :create, :migrate]
+
+  desc "Create the databases at #{DB_NAME}"
   task :create do
-    puts "Creating database #{DB_NAME} if it doesn't exist..."
-    exec("createdb #{DB_NAME}")
+    puts "Creating development and test databases if they don't exist..."
+    system("createdb #{APP_NAME}_development && createdb #{APP_NAME}_test")
   end
 
   desc "Drop the database at #{DB_NAME}"
   task :drop do
-    puts "Dropping database #{DB_NAME}..."
-    exec("dropdb #{DB_NAME}")
+    puts "Dropping development and test databases..."
+    system("dropdb #{APP_NAME}_development && dropdb #{APP_NAME}_test")
   end
 
   desc "Migrate the database (options: VERSION=x, VERBOSE=false, SCOPE=blog)."
@@ -116,6 +117,13 @@ namespace :db do
   task :version do
     puts "Current version: #{ActiveRecord::Migrator.current_version}"
   end
+
+  namespace :test do
+    desc "Migrate test database"
+    task :prepare do
+      system "rake db:migrate RACK_ENV=test"
+    end
+  end
 end
 
 desc 'Start IRB with application environment loaded'
@@ -123,7 +131,4 @@ task "console" do
   exec "irb -r./config/environment"
 end
 
-desc "Run the specs"
-RSpec::Core::RakeTask.new(:spec)
-
-task :default  => :specs
+task :default  => :spec

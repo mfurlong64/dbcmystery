@@ -1,15 +1,13 @@
-source :rubygems
-ruby "2.2.4"
+source 'https://rubygems.org'
 
-# PostgreSQL driver
 gem 'pg'
 
-# Sinatra driver
 gem 'sinatra'
 gem 'sinatra-contrib'
 
-# Use Thin for our web server
 gem 'thin'
+
+gem 'dotenv'
 
 gem 'activesupport'
 gem 'activerecord'
@@ -18,10 +16,3 @@ gem 'rake'
 gem 'bcrypt'
 
 gem 'shotgun'
-
-
-group :test do
-  gem 'faker'
-  gem 'rspec'
-  gem 'dotenv-rails'
-end
