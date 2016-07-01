@@ -58,10 +58,11 @@ post '/parties/login' do
 
   if @temp_party.authenticate(params[:password])
     session[:party_id] = @temp_party.id
+    UserParty.find_or_create_by(user_id: current_user.id, party_id: current_party.id)  # will find the user join table or create it
     redirect "/parties/#{@temp_party.id}/show"
   else
     @error = "Password is not correct"
-    redirect '/users'
+    erb :index
   end
 
 end
