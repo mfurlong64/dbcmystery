@@ -1,13 +1,30 @@
 <div class="container">
 	<h2> Welcome guests to <%= session[:party_id].title %></h2>
+	<h4> Rules of DBC Murder Myster</h4>
+	<p> Assign a murderer once everyone has joined the party... </p>
+	<p> Vote on who you suspect is the murderer! </p>
+	<p> The following still need to vote <p>
+	<% @guest_list.each do |guest| %>
+		<% if session[:party_id].user_parties.find_by(user_id: current_user.id).voted == 1 %>
+			<p> - <%= guest.name %></p>
+		<% end %>
+	<% end %>
+
+	<% if @murderer %>
+		<%= @murderer %>
+	<% end %>	
 	
+</div>	
 <div class="container">	
 	<%@guest_list.each do |guest| %>
 		<div class="guybox">
 			<h4>Guest: <%= guest.name %></h4> 
+			<% if current_user.id == guest.id %>
+			<p> You are the murderer: <%= current_user.user_parties.find_by(user_id: current_user.id, party_id: session[:party_id]).murderer %></p>
+			<% end %>
 			<img id="main_event" src="http://thecatapi.com/api/images/get?image_id=1d<%= guest.id %>">
 			<% if session[:party_id].user_parties.find_by(user_id: current_user.id).voted == 1 %>
-				<form action="/" method="post">
+				<form action="#" method="post">
 					<input type="hidden" name="ready" value="">
 					<input type="submit" value="VOTE">
 				</form>
@@ -18,7 +35,7 @@
 </div>
 
 <div class="container">
-	<form action="/" method="post">
+	<form action="/parties/show/ok" method="put">
 		<input type="hidden" name="ready" value="">
 		<input type="submit" value="Start Game and Assign the Murderer!">
 	</form>

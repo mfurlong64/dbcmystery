@@ -62,7 +62,12 @@ post '/parties/login' do
 
   if @temp_party.authenticate(params[:password])
     session[:party_id] = @temp_party
-    UserParty.find_or_create_by(user_id: current_user.id, party_id: current_party.id)  # will find the user join table or create it
+    if UserParty.find_or_create_by(user_id: current_user.id, party_id: session[:party_id])  # will find the user join table or create it
+      UserParty.find_or_create_by(user_id: current_user.id, party_id: session[:party_id]) 
+    else
+      erb :index
+    end
+
     redirect "/parties/#{@temp_party.id}/show"
   else
     @error = "Password is not correct"
@@ -72,8 +77,21 @@ post '/parties/login' do
 end
 
 
+get '/parties/show/ok' do
 
+  @guest_list = session[:party_id].users   # Consider using a helper files
 
+  @murder_array = UserParty.where(party_id: session[:party_id])
+
+  @murderer = @murder_array.shuffle.pop
+
+  @murderer.murderer = true
+
+  @murderer.save
+
+  erb :'/parties/show'
+
+end
 
 
 
