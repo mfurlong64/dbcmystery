@@ -19,8 +19,6 @@ gem 'bcrypt'
 
 gem 'shotgun'
 
-
-ruby "2.0.0"
 gem 'sinatra', '1.1.0'
 
 group :test do
