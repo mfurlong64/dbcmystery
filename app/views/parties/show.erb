@@ -1,17 +1,20 @@
 <div class="container">
 	<h2> Welcome guests to <%= @current_party.title %></h2>
-	<h4> Rules of DBC Murder Myster</h4>
+	<h4> Rules of DBC Murder Mystery</h4>
 	<p> Assign a murderer once everyone has joined the party... </p>
 	<p> Vote on who you suspect is the murderer! </p>
 	<p> The following still need to vote: <p>
+	<% @all_voted = 0 %>
 	<% @guest_list.each do |guest| %>
-		<% if @current_party.user_parties.find_by(user_id: current_user.id).voted == 1 %>
+		<% if @current_party.user_parties.find_by(user_id: guest.id).voted == 1 %>
 			<p> - <%= guest.name %></p>
-
+			<% @all_voted += 1 %>
 		<% end %>
 	<% end %>
 
-
+	<% if @all_voted == 0 %>
+	<a href="#"> Everyone has voted, click here to see who wins! </a>
+	<%  end %>
 </div>
 <div class="container">
 	<%@guest_list.each do |guest| %>
@@ -23,7 +26,7 @@
 			<img id="main_event" src="http://thecatapi.com/api/images/get?image_id=1d<%= guest.id %>">
 			<% if @current_party.user_parties.find_by(user_id: current_user.id).voted == 1 %>
 				<form action="/parties/show/ok" method="post">
-					<input type="hidden" name="ready" value="<%= current_user.user_parties.find_by(user_id: current_user.id, party_id: session[:party_id]).voted %>">
+					<input type="hidden" name="vote_for" value="<%= guest.user_parties.find_by(user_id: guest.id, party_id: session[:party_id]) %>">
 					<input type="submit" value="VOTE">
 				</form>
 			<% end %>
@@ -32,8 +35,10 @@
 </div>
 
 <div class="container">
-	<form action="/parties/show/ok" method="put">
+
+	<form action="/parties/show/ok" method="get">
 		<input type="hidden" name="ready" value="">
 		<input type="submit" value="Start Game and Assign the Murderer!">
 	</form>
+
 </div>

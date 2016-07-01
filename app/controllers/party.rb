@@ -93,6 +93,14 @@ get '/parties/show/ok' do
 
   @murderer.save
 
+  @current_party.user_parties.each do |user|
+
+    if user.murderer == true
+      @there_is_murderer = true
+    end
+
+  end
+
   erb :'/parties/show'
 
 end
@@ -108,6 +116,16 @@ post '/parties/show/ok' do
 @vote_array = UserParty.where(party_id: session[:party_id], user_id: session[:user_id]).first
 @vote_array.voted = 0
 @vote_array.save
+
+@user_get_voted = params[:vote_for]
+
+
+@vote_for = UserParty.find(@user_get_voted)
+
+@vote_for += 1
+
+puts "this the #{@votes_for}"
+@vote_for.save
 
 # @votehold = current_user.user_parties.find_by(user_id: current_user.id, party_id: session[:party_id]).voted = 0
 # @votehold.save
