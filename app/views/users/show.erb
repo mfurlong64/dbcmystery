@@ -10,7 +10,10 @@
 <div class="container">
   <h3>Games You're In</h3>
   <% @user.parties.each do |party|  %>
-  <p><a href="/parties/<%= party.id %>"><%= party.title %></p>
+  <p><a href="/parties/<%= party.id %>"><%= party.title %></a></p>
   <% end  %>
 
+  <form action="/parties/new" method="get">
+    <input type="submit" value="Add a New Party">
+  </form>
 </div>

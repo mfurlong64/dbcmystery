@@ -1,3 +1,8 @@
+
+get '/parties/new' do   # Make sure these are above
+  erb :'parties/new'
+end
+
 get '/parties/:id' do
 
   if current_user      #if user registered then send to log in
@@ -24,3 +29,8 @@ get '/parties/:id/login' do
   @party = Party.find(params[:id])
   erb :'/parties/login'
 end
+
+post '/parties' do
+  @party = Party.new(title: params[:title], password: params[:])
+end
+

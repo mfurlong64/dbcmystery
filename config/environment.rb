@@ -11,6 +11,10 @@ require 'rubygems'
 require 'uri'
 require 'pathname'
 
+
+require 'dotenv'
+Dotenv.load
+
 require 'bcrypt'
 
 require 'pg'
@@ -26,6 +30,8 @@ require 'erb'
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 
 APP_NAME = APP_ROOT.basename.to_s
+
+CAT_SECRET = ENV['CAT_SECRET']
 
 # Set up the controllers and helpers
 Dir[APP_ROOT.join('app', 'controllers', '*.rb')].each { |file| require file }

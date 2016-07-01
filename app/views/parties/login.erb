@@ -1,1 +1,10 @@
-Log into that party
+
+<div class = 'container'>
+<h1> Log Into the Party: </h1>
+<h2><%= @party.title %> </h2>
+<form action="/users/login" method="post">
+  Party Password:
+  <input class="boxes" type="password" name="password">
+  <input type="submit" value="Login">
+</form>
+</div>
