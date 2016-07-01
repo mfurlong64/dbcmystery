@@ -19,7 +19,6 @@ gem 'bcrypt'
 
 gem 'shotgun'
 
-gem 'sinatra', '1.1.0'
 
 group :test do
   gem 'faker'
