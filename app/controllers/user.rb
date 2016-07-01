@@ -31,6 +31,7 @@ post '/users' do
     @error = "Sorry this email has already been taken"
     erb :'users/new'
   end
+
 end
 
 get '/users/logout' do
@@ -52,7 +53,7 @@ post '/users/login' do
     session[:user_id] = @temp_user.id
     redirect "/users/#{@temp_user.id}"
   else
-    erb :index    # need to find a better route if mistakes were made
+    erb :'/users/new'
   end
 end
 

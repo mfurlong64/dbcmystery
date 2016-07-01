@@ -1,13 +1,15 @@
 get '/parties/:id' do
-  if session[:party_id]
 
-    # If the party is in the current session then do x
-
+  if current_user      #if user registered then send to log in
+   redirect "/parties/#{params[:id]}/login"
 
   else
-
-    # If the user is not in the session the move on
-
-    redirect "/parties/#{params[:id]}"
+    redirect "/users/new"   #sends user to register!
   end
+    # If the party is in the current session then do x
+    # If the user is not in the session the move on
+end
+
+get '/parties/:id/login' do
+  current_user ==
 end
